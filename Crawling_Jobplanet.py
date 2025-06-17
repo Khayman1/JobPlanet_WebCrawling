@@ -25,7 +25,7 @@ target_companies = pd.read_csv("enterprise_df_14_utf8_data.csv", encoding="utf-8
 target_companies_name = target_companies["기업명"].unique()
 # target_companies_name = ['LG전자','삼성전자']
 # 기업명을 데이터프레임으로 변환
-target_companies_name = pd.DataFrame(target_companies_name[0:5], columns=["기업명"])
+target_companies_name = pd.DataFrame(target_companies_name, columns=["기업명"])
 
 
 def _get_driver() -> webdriver.Chrome:
@@ -149,7 +149,7 @@ def extract_company_stats(soup: BeautifulSoup) -> Dict[str, Optional[str]]:
     
     ttl_text = ttl.get_text()
     m_cnt = ttl_text.replace("전체리뷰 통계(","").replace("명)","")
-    print(m_cnt)
+    # print(m_cnt)
     
     overall = soup.select_one("div.rate_star_top span.rate_point")  # 전체 평점 선택
     stats["overall_rating"] = overall.get_text(strip=True) if overall else None
@@ -247,15 +247,15 @@ if __name__ == "__main__":
         except Exception as e:
             error_list.append({"기업명": company, "error": str(e)})
         # 주기적으로 저장
-        if (idx + 1) % save_every == 0:
-            save_progress(all_companies_info, "jobplanet_crawling_progress.csv")
-            save_progress(error_list, "jobplanet_crawling_error.csv")
-        # 중간저장: 강제 종료 대비
-        if (idx + 1) % 50 == 0:
-            save_progress(
-                all_companies_info, f"jobplanet_crawling_progress_{idx+1}.csv"
-            )
-            save_progress(error_list, f"jobplanet_crawling_error_{idx+1}.csv")
+        # if (idx + 1) % save_every == 0:
+        #     save_progress(all_companies_info, "jobplanet_crawling_progress.csv")
+        #     save_progress(error_list, "jobplanet_crawling_error.csv")
+        # # 중간저장: 강제 종료 대비
+        # if (idx + 1) % 50 == 0:
+        #     save_progress(
+        #         all_companies_info, f"jobplanet_crawling_progress_{idx+1}.csv"
+        #     )
+        #     save_progress(error_list, f"jobplanet_crawling_error_{idx+1}.csv")
         time.sleep(1)  # 서버 부하 방지
 
     # 마지막 저장
