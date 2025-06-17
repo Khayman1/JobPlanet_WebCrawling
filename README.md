@@ -6,7 +6,7 @@
 
 - `Crawling_Jobplanet.py` : 크롤러 메인 코드 (Selenium + BeautifulSoup)
 - `enterprise_df_14_utf8_data.csv` : 크롤링 대상 기업명 목록(csv)
-- `jobplanet_crawling_progress.csv` : 진행상황 중간 저장(자동 생성)
+- `jobplanet_crawling_progress.csv` : 진행상황 저장
 - `jobplanet_crawling_error.csv` : 에러 기업/사유 기록(자동 생성)
 - `README.md` : 프로젝트 설명 파일
 
@@ -39,7 +39,7 @@
     ```
 
 4. **진행상황/에러**
-    - `jobplanet_crawling_progress.csv`: 수집된 데이터(중간저장)
+    - `jobplanet_crawling_progress.csv`: 수집된 데이터 저장
     - `jobplanet_crawling_error.csv`: 크롤링 실패(검색결과 없음, 기타 예외 등)
 
 5. **결과 확인**
@@ -49,7 +49,6 @@
 
 - **크롤링 대상 기업 개수**  
   코드 내에서 `target_companies_name = pd.DataFrame(..., columns=["기업명"])` 부분의 개수 조절로 테스트/전체 선택 가능.
-- **진행상황 자동 저장 주기**: 10개 기업마다 자동 저장
 - **실패 기업 로그 기록**: 에러 원인까지 저장
 
 ## ⚠️ 참고/주의사항
